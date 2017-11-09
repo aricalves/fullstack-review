@@ -1,20 +1,19 @@
 const express = require('express');
-const gitRepo = require('../helpers/github')
+const gitRepos = require('../helpers/github')
 const bodyParser = require('body-parser');
+const db = require('../database/index');
+
 let app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', function (req, res) {
-  // save the repo information in the database
-  gitRepo(req.body)
-    .then(repos => {
-      console.log('User repos:', repos);
-      // TODO: write the data to the db
-    })
+
+  gitRepos(req.body)
+    .then(repos => db.save(JSON.parse(repos)))
     .catch(err => {
-      console.log('API call error', err);
+      console.log('Error getting user repos:', err);
     });
 
   res.end();

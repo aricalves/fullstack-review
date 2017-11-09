@@ -21,7 +21,7 @@ class App extends React.Component {
         'username': term
       },
       (err, message, data) => {
-        if (err) console.log('¯\_(ツ)_/¯ Error:', err);
+        if (err) console.log('Error ¯\\_(ツ)_/¯ ', err);
     });
   }
 
