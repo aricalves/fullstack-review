@@ -15,7 +15,14 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    $.post('/repos',
+      {
+        'Content-Type': 'application/json',
+        'username': term
+      },
+      (err, message, data) => {
+        if (err) console.log('¯\_(ツ)_/¯ Error:', err);
+    });
   }
 
   render () {
