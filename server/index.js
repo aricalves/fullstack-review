@@ -7,15 +7,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/repos', function (req, res) {
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
   // save the repo information in the database
   gitRepo(req.body)
-    .then((repos) => {
-      console.log(repos);
+    .then(repos => {
+      console.log('User repos:', repos);
+      // TODO: write the data to the db
     })
     .catch(err => {
-      console.log('spaghetti', err);
+      console.log('API call error', err);
     });
 
   res.end();
@@ -28,7 +27,7 @@ app.get('/repos', function (req, res) {
 
 let port = 1128;
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
 

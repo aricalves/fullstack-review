@@ -1,4 +1,4 @@
-const request = require('request-promise');
+const rp = require('request-promise');
 const config = require('../config.js');
 
 
@@ -12,7 +12,7 @@ let getReposByUsername = ({username}) => {
     }
   };
   
-  return request(options);
+  return rp(options);
 }
 
 module.exports = getReposByUsername;

@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost/fetcher', {useMongoose: true});
 
-
+mongoose.on('error', console.error.bind(console, 'connection error:'));
 
 let repoSchema = mongoose.Schema({
   repo_name: String,
   owner: String,
+  avatar: String,
   url: String,
   forks: Number,
   description: String
