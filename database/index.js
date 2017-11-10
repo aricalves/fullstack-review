@@ -18,6 +18,7 @@ const repoSchema = mongoose.Schema({
   repo_name: String,
   owner: String,
   avatar: String,
+  repo_url: String,
   url: String,
   forks: Number,
   description: String
@@ -32,6 +33,7 @@ const mongifyRepos = function(repos) {
       repo_name: repo.name,
       owner: repo.owner.login,
       avatar: repo.owner.avatar_url,
+      repo_url: repo.html_url,
       url: repo.owner.html_url,
       forks: repo.forks,
       description: repo.description
