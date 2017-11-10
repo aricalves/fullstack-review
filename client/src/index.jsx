@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Fetch from 'react-fetch';
-import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import RepoListItem from './components/RepoListItem.jsx';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,14 +17,17 @@ class App extends React.Component {
     this.setState({
       repos: newRepos
     })
-    console.log(this.state)
   }
 
   componentDidMount() {
+    this.getRepos();
+  }
+
+  getRepos() {
     fetch('/repos')
       .then(response => response.json())
       .then(data => this.updateRepos(data))
-      .catch(err => console.log(err));
+      .catch(err => {throw err});
   }
 
   search(term) {
@@ -36,6 +39,7 @@ class App extends React.Component {
       },
       (err, message, data) => {
         if (err) console.log('Error ¯\\_(ツ)_/¯ ', err);
+        this.getRepos();
     });
   }
 

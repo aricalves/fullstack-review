@@ -32,7 +32,7 @@ const mongifyRepos = function(repos) {
       repo_name: repo.name,
       owner: repo.owner.login,
       avatar: repo.owner.avatar_url,
-      url: repo.url,
+      url: repo.owner.html_url,
       forks: repo.forks,
       description: repo.description
     });
